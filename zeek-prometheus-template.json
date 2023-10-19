@@ -1,0 +1,686 @@
+{
+    "zabbix_export": {
+        "version": "6.0",
+        "date": "2023-10-19T07:17:26Z",
+        "groups": [
+            {
+                "uuid": "6e9974d172604245a6ad14e3a17eaffe",
+                "name": "Zeek Servers"
+            }
+        ],
+        "templates": [
+            {
+                "uuid": "450f070d03de4fa6ba8058404d45b2ab",
+                "template": "Zeek Prometheus Template",
+                "name": "Zeek Prometheus Template",
+                "groups": [
+                    {
+                        "name": "Zeek Servers"
+                    }
+                ],
+                "items": [
+                    {
+                        "uuid": "596a21e82f15450eb29f85d11a352056",
+                        "name": "Zeek Prometheus Node Exporter",
+                        "type": "HTTP_AGENT",
+                        "key": "master",
+                        "history": "0",
+                        "trends": "0",
+                        "value_type": "TEXT",
+                        "url": "http://{HOST.IP}:9911/metrics",
+                        "tags": [
+                            {
+                                "tag": "Application",
+                                "value": "Zeek"
+                            }
+                        ]
+                    }
+                ],
+                "discovery_rules": [
+                    {
+                        "uuid": "3b76ecb5d60240058405f83913e51ed4",
+                        "name": "Zeek nodes discovery",
+                        "type": "DEPENDENT",
+                        "key": "zeek.nodes.discovery",
+                        "delay": "0",
+                        "item_prototypes": [
+                            {
+                                "uuid": "0d63b55d1e2f478586fda2959efa4078",
+                                "name": "Zeek Node: {#NODE} - Process CPU Total",
+                                "type": "DEPENDENT",
+                                "key": "zeek.process.cpu.seconds.total[{#NODE}]",
+                                "delay": "0",
+                                "value_type": "FLOAT",
+                                "units": "seconds",
+                                "preprocessing": [
+                                    {
+                                        "type": "PROMETHEUS_PATTERN",
+                                        "parameters": [
+                                            "process_cpu_seconds_total{endpoint=\"{#NODE}\"}",
+                                            "value",
+                                            ""
+                                        ]
+                                    }
+                                ],
+                                "master_item": {
+                                    "key": "master"
+                                },
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "Zeek"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "946a7075545f42d1a99aaabf831f6d7c",
+                                "name": "Zeek Node: {#NODE} - Process Open File Descriptors",
+                                "type": "DEPENDENT",
+                                "key": "zeek.process.open.fds[{#NODE}]",
+                                "delay": "0",
+                                "value_type": "FLOAT",
+                                "units": "Files",
+                                "preprocessing": [
+                                    {
+                                        "type": "PROMETHEUS_PATTERN",
+                                        "parameters": [
+                                            "process_open_fds{endpoint=\"{#NODE}\"}",
+                                            "value",
+                                            ""
+                                        ]
+                                    }
+                                ],
+                                "master_item": {
+                                    "key": "master"
+                                },
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "Zeek"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "3b05d05434eb41778944ec8dd2ac7cea",
+                                "name": "Zeek Node: {#NODE} - Process Resident Memory",
+                                "type": "DEPENDENT",
+                                "key": "zeek.process.resident.memory.bytes[{#NODE}]",
+                                "delay": "0",
+                                "value_type": "FLOAT",
+                                "units": "Bytes",
+                                "preprocessing": [
+                                    {
+                                        "type": "PROMETHEUS_PATTERN",
+                                        "parameters": [
+                                            "process_resident_memory_bytes{endpoint=\"{#NODE}\"}",
+                                            "value",
+                                            ""
+                                        ]
+                                    }
+                                ],
+                                "master_item": {
+                                    "key": "master"
+                                },
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "Zeek"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "6a83bb3356d04e45bda5c125bd3a45d0",
+                                "name": "Zeek Node: {#NODE} - Process Virtual Memory",
+                                "type": "DEPENDENT",
+                                "key": "zeek.process.virtual.memory.bytes[{#NODE}]",
+                                "delay": "0",
+                                "value_type": "FLOAT",
+                                "units": "Bytes",
+                                "preprocessing": [
+                                    {
+                                        "type": "PROMETHEUS_PATTERN",
+                                        "parameters": [
+                                            "process_virtual_memory_bytes{endpoint=\"{#NODE}\"}",
+                                            "value",
+                                            ""
+                                        ]
+                                    }
+                                ],
+                                "master_item": {
+                                    "key": "master"
+                                },
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "Zeek"
+                                    }
+                                ]
+                            }
+                        ],
+                        "graph_prototypes": [
+                            {
+                                "uuid": "0754cf3a3cd5499d8aab0374b7a086e2",
+                                "name": "Zeek Node: {#NODE} - CPU Total",
+                                "graph_items": [
+                                    {
+                                        "drawtype": "FILLED_REGION",
+                                        "color": "199C0D",
+                                        "calc_fnc": "ALL",
+                                        "item": {
+                                            "host": "Zeek Prometheus Template",
+                                            "key": "zeek.process.cpu.seconds.total[{#NODE}]"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "539cd7ad043e4dc6817ead5be1d97d88",
+                                "name": "Zeek Node: {#NODE} - Process Open File Descriptors",
+                                "graph_items": [
+                                    {
+                                        "drawtype": "FILLED_REGION",
+                                        "color": "199C0D",
+                                        "calc_fnc": "ALL",
+                                        "item": {
+                                            "host": "Zeek Prometheus Template",
+                                            "key": "zeek.process.open.fds[{#NODE}]"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "6cd8c85c12f9476faf9abd0ef46dadaa",
+                                "name": "Zeek Node: {#NODE} - RAM Used",
+                                "graph_items": [
+                                    {
+                                        "drawtype": "FILLED_REGION",
+                                        "color": "199C0D",
+                                        "calc_fnc": "ALL",
+                                        "item": {
+                                            "host": "Zeek Prometheus Template",
+                                            "key": "zeek.process.resident.memory.bytes[{#NODE}]"
+                                        }
+                                    },
+                                    {
+                                        "sortorder": "1",
+                                        "drawtype": "FILLED_REGION",
+                                        "color": "F63100",
+                                        "calc_fnc": "ALL",
+                                        "item": {
+                                            "host": "Zeek Prometheus Template",
+                                            "key": "zeek.process.virtual.memory.bytes[{#NODE}]"
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "master_item": {
+                            "key": "master"
+                        },
+                        "lld_macro_paths": [
+                            {
+                                "lld_macro": "{#NODE}",
+                                "path": "$.labels[\"endpoint\"]"
+                            }
+                        ],
+                        "preprocessing": [
+                            {
+                                "type": "PROMETHEUS_TO_JSON",
+                                "parameters": [
+                                    "zeek_version_info"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "1c2a585ba9ec4075a5f8d7f72260f946",
+                        "name": "Zeek workers discovery",
+                        "type": "DEPENDENT",
+                        "key": "zeek.workers.discovery",
+                        "delay": "0",
+                        "filter": {
+                            "conditions": [
+                                {
+                                    "macro": "{#WORKER}",
+                                    "value": "worker.*",
+                                    "formulaid": "A"
+                                }
+                            ]
+                        },
+                        "item_prototypes": [
+                            {
+                                "uuid": "87d189c940b54307b0eb7753357fcf38",
+                                "name": "Zeek Node: {#WORKER} - Active ICMP Sessions",
+                                "type": "DEPENDENT",
+                                "key": "zeek.active.icmp.sessions[{#WORKER}]",
+                                "delay": "0",
+                                "preprocessing": [
+                                    {
+                                        "type": "PROMETHEUS_PATTERN",
+                                        "parameters": [
+                                            "zeek_active_sessions{endpoint=\"{#WORKER}\",protocol=\"icmp\"}",
+                                            "value",
+                                            ""
+                                        ]
+                                    }
+                                ],
+                                "master_item": {
+                                    "key": "master"
+                                },
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "Zeek"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "5eff98b56213453fb8b2283a2e1095f9",
+                                "name": "Zeek Node: {#WORKER} - Active TCP Sessions",
+                                "type": "DEPENDENT",
+                                "key": "zeek.active.tcp.sessions[{#WORKER}]",
+                                "delay": "0",
+                                "preprocessing": [
+                                    {
+                                        "type": "PROMETHEUS_PATTERN",
+                                        "parameters": [
+                                            "zeek_active_sessions{endpoint=\"{#WORKER}\",protocol=\"tcp\"}",
+                                            "value",
+                                            ""
+                                        ]
+                                    }
+                                ],
+                                "master_item": {
+                                    "key": "master"
+                                },
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "Zeek"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "c93c93ca4d424e5db1cc8d5f4413225a",
+                                "name": "Zeek Node: {#WORKER} - Active UDP Sessions",
+                                "type": "DEPENDENT",
+                                "key": "zeek.active.udp.sessions[{#WORKER}]",
+                                "delay": "0",
+                                "preprocessing": [
+                                    {
+                                        "type": "PROMETHEUS_PATTERN",
+                                        "parameters": [
+                                            "zeek_active_sessions{endpoint=\"{#WORKER}\",protocol=\"udp\"}",
+                                            "value",
+                                            ""
+                                        ]
+                                    }
+                                ],
+                                "master_item": {
+                                    "key": "master"
+                                },
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "Zeek"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "afdde543631d4677a2e89d72dbf8ba3a",
+                                "name": "Zeek Node: {#WORKER} - Network Dropped Packets",
+                                "type": "DEPENDENT",
+                                "key": "zeek.net.dropped.packets.total[{#WORKER}]",
+                                "delay": "0",
+                                "value_type": "FLOAT",
+                                "units": "Packets",
+                                "preprocessing": [
+                                    {
+                                        "type": "PROMETHEUS_PATTERN",
+                                        "parameters": [
+                                            "zeek_net_dropped_packets_total{endpoint=\"{#WORKER}\"}",
+                                            "value",
+                                            ""
+                                        ]
+                                    },
+                                    {
+                                        "type": "SIMPLE_CHANGE",
+                                        "parameters": [
+                                            ""
+                                        ]
+                                    }
+                                ],
+                                "master_item": {
+                                    "key": "master"
+                                },
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "Zeek"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "2b117145250349968ddfe5a52d46f3d0",
+                                "name": "Zeek Node: {#WORKER} - Network Link Packets",
+                                "type": "DEPENDENT",
+                                "key": "zeek.net.link.packets.total[{#WORKER}]",
+                                "delay": "0",
+                                "value_type": "FLOAT",
+                                "units": "Packets",
+                                "description": "zeek_net_link_packets_total Total number of packets on the packet source link before filtering",
+                                "preprocessing": [
+                                    {
+                                        "type": "PROMETHEUS_PATTERN",
+                                        "parameters": [
+                                            "zeek_net_link_packets_total{endpoint=\"{#WORKER}\"}",
+                                            "value",
+                                            ""
+                                        ]
+                                    },
+                                    {
+                                        "type": "SIMPLE_CHANGE",
+                                        "parameters": [
+                                            ""
+                                        ]
+                                    }
+                                ],
+                                "master_item": {
+                                    "key": "master"
+                                },
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "Zeek"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "350edbe9e69d46b0afb5ca95c64ee1a7",
+                                "name": "Zeek Node: {#WORKER} - Network Packets Lag",
+                                "type": "DEPENDENT",
+                                "key": "zeek.net.packet.lag.seconds[{#WORKER}]",
+                                "delay": "0",
+                                "value_type": "FLOAT",
+                                "units": "seconds",
+                                "preprocessing": [
+                                    {
+                                        "type": "PROMETHEUS_PATTERN",
+                                        "parameters": [
+                                            "zeek_net_packet_lag_seconds{endpoint=\"{#WORKER}\"}",
+                                            "value",
+                                            ""
+                                        ]
+                                    },
+                                    {
+                                        "type": "SIMPLE_CHANGE",
+                                        "parameters": [
+                                            ""
+                                        ]
+                                    }
+                                ],
+                                "master_item": {
+                                    "key": "master"
+                                },
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "Zeek"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "fb37177c81114881bb9fe7f49f927c29",
+                                "name": "Zeek Node: {#WORKER} - Network Received Bytes",
+                                "type": "DEPENDENT",
+                                "key": "zeek.net.received.bytes.total[{#WORKER}]",
+                                "delay": "0",
+                                "units": "Bytes",
+                                "preprocessing": [
+                                    {
+                                        "type": "PROMETHEUS_PATTERN",
+                                        "parameters": [
+                                            "zeek_net_received_bytes_total{endpoint=\"{#WORKER}\"}",
+                                            "value",
+                                            ""
+                                        ]
+                                    },
+                                    {
+                                        "type": "SIMPLE_CHANGE",
+                                        "parameters": [
+                                            ""
+                                        ]
+                                    }
+                                ],
+                                "master_item": {
+                                    "key": "master"
+                                },
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "Zeek"
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "a9ad19dcd25b4a2ab8c4c540fe7c825c",
+                                "name": "Zeek Node: {#WORKER} - Network Received Packets",
+                                "type": "DEPENDENT",
+                                "key": "zeek.net.received.packets.total[{#WORKER}]",
+                                "delay": "0",
+                                "units": "Packets",
+                                "preprocessing": [
+                                    {
+                                        "type": "PROMETHEUS_PATTERN",
+                                        "parameters": [
+                                            "zeek_net_received_packets_total{endpoint=\"{#WORKER}\"}",
+                                            "value",
+                                            ""
+                                        ]
+                                    },
+                                    {
+                                        "type": "SIMPLE_CHANGE",
+                                        "parameters": [
+                                            ""
+                                        ]
+                                    }
+                                ],
+                                "master_item": {
+                                    "key": "master"
+                                },
+                                "tags": [
+                                    {
+                                        "tag": "Application",
+                                        "value": "Zeek"
+                                    }
+                                ]
+                            }
+                        ],
+                        "graph_prototypes": [
+                            {
+                                "uuid": "0cf43fcb8d1540738d0a29bbceb1a31b",
+                                "name": "Zeek Active Sessions for {#WORKER}",
+                                "show_work_period": "NO",
+                                "show_triggers": "NO",
+                                "graph_items": [
+                                    {
+                                        "drawtype": "FILLED_REGION",
+                                        "color": "199C0D",
+                                        "calc_fnc": "MIN",
+                                        "item": {
+                                            "host": "Zeek Prometheus Template",
+                                            "key": "zeek.active.icmp.sessions[{#WORKER}]"
+                                        }
+                                    },
+                                    {
+                                        "sortorder": "1",
+                                        "drawtype": "FILLED_REGION",
+                                        "color": "BF360C",
+                                        "calc_fnc": "MIN",
+                                        "item": {
+                                            "host": "Zeek Prometheus Template",
+                                            "key": "zeek.active.tcp.sessions[{#WORKER}]"
+                                        }
+                                    },
+                                    {
+                                        "sortorder": "2",
+                                        "drawtype": "FILLED_REGION",
+                                        "color": "2774A4",
+                                        "calc_fnc": "MIN",
+                                        "item": {
+                                            "host": "Zeek Prometheus Template",
+                                            "key": "zeek.active.udp.sessions[{#WORKER}]"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "aa9b1d419fcf49d49d418380b2cb9352",
+                                "name": "Zeek Network Packets for {#WORKER}",
+                                "graph_items": [
+                                    {
+                                        "drawtype": "FILLED_REGION",
+                                        "color": "FF0000",
+                                        "calc_fnc": "MIN",
+                                        "item": {
+                                            "host": "Zeek Prometheus Template",
+                                            "key": "zeek.net.dropped.packets.total[{#WORKER}]"
+                                        }
+                                    },
+                                    {
+                                        "sortorder": "1",
+                                        "drawtype": "FILLED_REGION",
+                                        "color": "0040FF",
+                                        "calc_fnc": "MIN",
+                                        "item": {
+                                            "host": "Zeek Prometheus Template",
+                                            "key": "zeek.net.received.packets.total[{#WORKER}]"
+                                        }
+                                    },
+                                    {
+                                        "sortorder": "2",
+                                        "drawtype": "FILLED_REGION",
+                                        "color": "199C0D",
+                                        "calc_fnc": "ALL",
+                                        "item": {
+                                            "host": "Zeek Prometheus Template",
+                                            "key": "zeek.net.link.packets.total[{#WORKER}]"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "0b7082678a2942a3a12ae6adbe853315",
+                                "name": "Zeek Network Packets Lag for {#WORKER}",
+                                "graph_items": [
+                                    {
+                                        "drawtype": "FILLED_REGION",
+                                        "color": "199C0D",
+                                        "calc_fnc": "ALL",
+                                        "item": {
+                                            "host": "Zeek Prometheus Template",
+                                            "key": "zeek.net.packet.lag.seconds[{#WORKER}]"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "uuid": "8968231ae6854fd1bad7dcc44c4ed584",
+                                "name": "Zeek Network Received Bytes for {#WORKER}",
+                                "graph_items": [
+                                    {
+                                        "drawtype": "FILLED_REGION",
+                                        "color": "199C0D",
+                                        "calc_fnc": "MIN",
+                                        "item": {
+                                            "host": "Zeek Prometheus Template",
+                                            "key": "zeek.net.received.bytes.total[{#WORKER}]"
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "master_item": {
+                            "key": "master"
+                        },
+                        "lld_macro_paths": [
+                            {
+                                "lld_macro": "{#WORKER}",
+                                "path": "$.labels[\"endpoint\"]"
+                            }
+                        ],
+                        "preprocessing": [
+                            {
+                                "type": "PROMETHEUS_TO_JSON",
+                                "parameters": [
+                                    "zeek_version_info"
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "tags": [
+                    {
+                        "tag": "Application",
+                        "value": "Zeek"
+                    }
+                ],
+                "dashboards": [
+                    {
+                        "uuid": "c95d2e428ac44b348adc6c4776e7212d",
+                        "name": "Zeek Sensor Dashboard",
+                        "pages": [
+                            {
+                                "widgets": [
+                                    {
+                                        "type": "GRAPH_PROTOTYPE",
+                                        "name": "Workers Received Bytes",
+                                        "width": "24",
+                                        "height": "10",
+                                        "fields": [
+                                            {
+                                                "type": "INTEGER",
+                                                "name": "rows",
+                                                "value": "2"
+                                            },
+                                            {
+                                                "type": "GRAPH_PROTOTYPE",
+                                                "name": "graphid",
+                                                "value": {
+                                                    "host": "Zeek Prometheus Template",
+                                                    "name": "Zeek Network Received Bytes for {#WORKER}"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "GRAPH_PROTOTYPE",
+                                        "name": "Zeek Active Sessions for Workers",
+                                        "y": "10",
+                                        "width": "24",
+                                        "height": "8",
+                                        "fields": [
+                                            {
+                                                "type": "INTEGER",
+                                                "name": "rows",
+                                                "value": "2"
+                                            },
+                                            {
+                                                "type": "GRAPH_PROTOTYPE",
+                                                "name": "graphid",
+                                                "value": {
+                                                    "host": "Zeek Prometheus Template",
+                                                    "name": "Zeek Active Sessions for {#WORKER}"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
